@@ -7,8 +7,9 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'todo-list';
+  tasks: string[] = [];
 
   Add(newTask: string){
-    alert(newTask)
+    this.tasks.push(newTask);
   }
 }
