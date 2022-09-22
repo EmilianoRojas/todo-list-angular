@@ -8,7 +8,7 @@ import { Component } from '@angular/core';
 export class AppComponent {
   title = 'todo-list';
 
-  Add(){
-    alert('add task')
+  Add(newTask: string){
+    alert(newTask)
   }
 }

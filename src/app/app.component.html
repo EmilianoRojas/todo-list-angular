@@ -2,8 +2,8 @@
   <div class="todo-list">
     {{title}}
     <div class="input-group">
-      <input type="text" placeholder="Todo">
-      <button (click)="Add()" class="add-button">+</button>
+      <input type="text" #newTask placeholder="Todo">
+      <button (click)="Add(newTask.value)" class="add-button">+</button>
     </div>
     <table>
       <tr class="even">
