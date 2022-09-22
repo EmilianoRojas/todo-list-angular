@@ -3,7 +3,7 @@
     {{title}}
     <div class="input-group">
       <input type="text" #newTask placeholder="Todo">
-      <button (click)="Add(newTask.value)" class="add-button">+</button>
+      <button (click)="add(newTask.value)" class="add-button">+</button>
     </div>
     <table>
       <tr *ngFor="let task of tasks" class="even">
@@ -13,7 +13,7 @@
           </pre>
         </td>
         <td>
-          <button class="remove-button">X</button>
+          <button (click)="remove(task)" class="remove-button">X</button>
           <button class="done-button">Done</button>
         </td>
       </tr>
