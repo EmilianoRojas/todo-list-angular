@@ -10,7 +10,9 @@ export class AppComponent {
   tasks: string[] = [];
 
   add(newTask: string){
-    this.tasks.push(newTask);
+    if (newTask) {      
+      this.tasks.push(newTask);
+    }
   }
 
   remove(existingTask: string){
@@ -19,5 +21,9 @@ export class AppComponent {
     if (confirmed) {
       this.tasks = this.tasks.filter( task => task != existingTask);
     }
+  }
+
+  markAsDone(task: string){
+
   }
 }
