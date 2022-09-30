@@ -6,16 +6,9 @@ import { CalendarModule } from './calendar/calendar.module';
 import { TaskListModule } from './task-list/task-list.module';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    TaskListModule,
-    CalendarModule,
-  ],
+  declarations: [AppComponent],
+  imports: [BrowserModule, AppRoutingModule, TaskListModule, CalendarModule],
   providers: [],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
 })
-export class AppModule { }
+export class AppModule {}
