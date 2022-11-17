@@ -1,8 +1,13 @@
 <div class="container">
   <div class="todo-list">
-    <form (ngSubmit)="add(taskNgForm)" #taskNgForm="ngForm">
+    <form (ngSubmit)="add(taskNgForm)" #taskNgForm="ngForm" #form>
       <div class="input-group">
-        <input name="date" [matDatepicker]="picker" [(ngModel)]="date" />
+        <input
+          name="date"
+          readonly
+          [matDatepicker]="picker"
+          [(ngModel)]="date"
+        />
         <mat-datepicker-toggle [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
       </div>
@@ -15,14 +20,18 @@
           placeholder="Todo"
           required
           #newTask="ngModel"
+          minlength="4"
         />
-        <button class="add-button">+</button>
+        <button class="add-button" [disabled]="!form.checkValidity()">+</button>
       </div>
       <div
         *ngIf="newTask.invalid && (newTask.touched || newTask.dirty)"
         class="validation-error"
       >
-        Task title is required.
+        <div *ngIf="newTask.errors?.['required']">Task title is required.</div>
+        <div *ngIf="newTask.errors?.['minlength']">
+          Must have at least 4 pi.
+        </div>
       </div>
     </form>
     <table>
