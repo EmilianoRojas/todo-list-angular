@@ -1,14 +1,30 @@
 <div class="container">
   <div class="todo-list">
-    <div class="input-group">
-      <input [matDatepicker]="picker" [(ngModel)]="date" />
-      <mat-datepicker-toggle [for]="picker"></mat-datepicker-toggle>
-      <mat-datepicker #picker></mat-datepicker>
-    </div>
-    <div class="input-group">
-      <input type="text" [(ngModel)]="newTaskTitle" placeholder="Todo" />
-      <button (click)="add()" class="add-button">+</button>
-    </div>
+    <form (ngSubmit)="add(taskNgForm)" #taskNgForm="ngForm">
+      <div class="input-group">
+        <input name="date" [matDatepicker]="picker" [(ngModel)]="date" />
+        <mat-datepicker-toggle [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </div>
+
+      <div class="input-group">
+        <input
+          name="taskTitle"
+          type="text"
+          [(ngModel)]="newTaskTitle"
+          placeholder="Todo"
+          required
+          #newTask="ngModel"
+        />
+        <button class="add-button">+</button>
+      </div>
+      <div
+        *ngIf="newTask.invalid && (newTask.touched || newTask.dirty)"
+        class="validation-error"
+      >
+        Task title is required.
+      </div>
+    </form>
     <table>
       <tr
         *ngFor="let task of tasks; let i = index"
