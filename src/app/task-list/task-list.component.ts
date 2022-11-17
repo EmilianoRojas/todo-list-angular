@@ -10,16 +10,17 @@ export class TaskListComponent implements OnInit {
   constructor(private route: ActivatedRoute) {}
 
   date: Date = new Date();
-
+  newTaskTitle: string = '';
   ngOnInit(): void {
     this.date = new Date(this.route.snapshot.params['date']);
   }
 
   tasks: Task[] = [];
 
-  add(newTask: string) {
-    if (newTask) {
-      this.tasks.push(new Task(newTask));
+  add() {
+    if (this.newTaskTitle) {
+      this.tasks.push(new Task(this.newTaskTitle));
+      this.newTaskTitle = '';
     }
   }
 
