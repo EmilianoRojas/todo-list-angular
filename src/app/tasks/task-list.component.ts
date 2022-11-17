@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { NgForm } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
+import { NewTask } from './new-task.dto';
+import { TaskItem } from './task-item.dto';
 
 @Component({
   selector: 'app-task-list',
@@ -10,36 +12,27 @@ import { ActivatedRoute } from '@angular/router';
 export class TaskListComponent implements OnInit {
   constructor(private route: ActivatedRoute) {}
 
-  date: Date = new Date();
-  newTaskTitle: string = '';
+  newTask: NewTask = new NewTask();
+
   ngOnInit(): void {
-    this.date = new Date(this.route.snapshot.params['date']);
+    var strDate = this.route.snapshot.params['date'];
+    this.newTask = new NewTask(this.newTask.title, new Date(strDate));
   }
 
-  tasks: Task[] = [];
+  tasks: TaskItem[] = [];
 
   add(taskNgForm: NgForm) {
     if (taskNgForm.touched == false) return;
     if (taskNgForm.valid == false) return;
-    this.tasks.push(new Task(this.newTaskTitle));
-    taskNgForm.reset({ date: this.date });
+    this.tasks.push(new TaskItem(this.newTask.title));
+    taskNgForm.reset({ date: this.newTask.date });
   }
 
-  remove(existingTask: Task) {
+  remove(existingTask: TaskItem) {
     let confirmed = confirm(`Deseas eliminar el item "${existingTask.title}"?`);
 
     if (confirmed) {
       this.tasks = this.tasks.filter((task) => task != existingTask);
     }
-  }
-}
-
-class Task {
-  public isDone = false;
-
-  constructor(public title: string) {}
-
-  toggleIsDone() {
-    this.isDone = !this.isDone;
   }
 }

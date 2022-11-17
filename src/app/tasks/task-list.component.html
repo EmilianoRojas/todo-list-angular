@@ -6,7 +6,7 @@
           name="date"
           readonly
           [matDatepicker]="picker"
-          [(ngModel)]="date"
+          [(ngModel)]="newTask.date"
         />
         <mat-datepicker-toggle [for]="picker"></mat-datepicker-toggle>
         <mat-datepicker #picker></mat-datepicker>
@@ -16,20 +16,25 @@
         <input
           name="taskTitle"
           type="text"
-          [(ngModel)]="newTaskTitle"
+          [(ngModel)]="newTask.title"
           placeholder="Todo"
           required
-          #newTask="ngModel"
+          #newTaskNgModel="ngModel"
           minlength="4"
         />
         <button class="add-button" [disabled]="!form.checkValidity()">+</button>
       </div>
       <div
-        *ngIf="newTask.invalid && (newTask.touched || newTask.dirty)"
+        *ngIf="
+          newTaskNgModel.invalid &&
+          (newTaskNgModel.touched || newTaskNgModel.dirty)
+        "
         class="validation-error"
       >
-        <div *ngIf="newTask.errors?.['required']">Task title is required.</div>
-        <div *ngIf="newTask.errors?.['minlength']">
+        <div *ngIf="newTaskNgModel.errors?.['required']">
+          Task title is required.
+        </div>
+        <div *ngIf="newTaskNgModel.errors?.['minlength']">
           Must have at least 4 pi.
         </div>
       </div>
