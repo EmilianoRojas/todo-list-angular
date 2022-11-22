@@ -3,6 +3,7 @@ import { NgForm } from '@angular/forms';
 import { ActivatedRoute } from '@angular/router';
 import { NewTask } from './new-task.dto';
 import { TaskItem } from './task-item.dto';
+import { TaskService } from './task.service';
 
 @Component({
   selector: 'app-task-list',
@@ -12,6 +13,9 @@ import { TaskItem } from './task-item.dto';
 export class TaskListComponent implements OnInit {
   constructor(private route: ActivatedRoute) {}
 
+  taskService = new TaskService();
+
+  tasks = this.taskService.getAllTasks();
   newTask: NewTask = new NewTask();
 
   ngOnInit(): void {
@@ -19,12 +23,10 @@ export class TaskListComponent implements OnInit {
     this.newTask = new NewTask(this.newTask.title, new Date(strDate));
   }
 
-  tasks: TaskItem[] = [];
-
   add(taskNgForm: NgForm) {
     if (taskNgForm.touched == false) return;
-    if (taskNgForm.valid == false) return;
-    this.tasks.push(new TaskItem(this.newTask.title));
+
+    this.taskService.addTask(this.newTask);
     taskNgForm.reset({ date: this.newTask.date });
   }
 
@@ -32,7 +34,9 @@ export class TaskListComponent implements OnInit {
     let confirmed = confirm(`Deseas eliminar el item "${existingTask.title}"?`);
 
     if (confirmed) {
-      this.tasks = this.tasks.filter((task) => task != existingTask);
+      console.log('si se confirma');
+
+      this.taskService.removeTask(existingTask);
     }
   }
 }

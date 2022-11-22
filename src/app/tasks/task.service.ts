@@ -8,11 +8,21 @@ import { TaskItem } from './task-item.dto';
 export class TaskService {
   constructor() {}
 
+  private tasks: TaskItem[] = [];
+
   getAllTasks(): TaskItem[] {
-    throw new Error('not implemented yet');
+    return this.tasks;
   }
 
-  addTask(newTask: NewTask) {}
+  addTask(newTask: NewTask) {
+    this.tasks.push(new TaskItem(newTask.title));
 
-  removeTask(existingTask: TaskItem) {}
+    console.log();
+  }
+
+  removeTask(existingTask: TaskItem) {
+    console.log('removiendo desde servicio');
+
+    this.tasks = this.tasks.filter((task) => task != existingTask);
+  }
 }
