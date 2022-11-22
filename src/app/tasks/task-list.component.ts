@@ -11,9 +11,10 @@ import { TaskService } from './task.service';
   styleUrls: ['./task-list.component.css'],
 })
 export class TaskListComponent implements OnInit {
-  constructor(private route: ActivatedRoute) {}
-
-  taskService = new TaskService();
+  constructor(
+    private route: ActivatedRoute,
+    private taskService: TaskService,
+  ) {}
 
   tasks = this.taskService.getAllTasks();
   newTask: NewTask = new NewTask();
