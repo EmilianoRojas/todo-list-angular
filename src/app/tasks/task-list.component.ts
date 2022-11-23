@@ -28,6 +28,7 @@ export class TaskListComponent implements OnInit {
     if (taskNgForm.touched == false) return;
 
     this.taskService.addTask(this.newTask);
+    this.tasks = this.taskService.getAllTasks();
     taskNgForm.reset({ date: this.newTask.date });
   }
 
@@ -38,6 +39,7 @@ export class TaskListComponent implements OnInit {
       console.log('si se confirma');
 
       this.taskService.removeTask(existingTask);
+      this.tasks = this.taskService.getAllTasks();
     }
   }
 }

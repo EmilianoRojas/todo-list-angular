@@ -1,4 +1,5 @@
 import { Injectable } from '@angular/core';
+import { BehaviorSubject, Observable } from 'rxjs';
 import { NewTask } from './new-task.dto';
 import { TaskItem } from './task-item.dto';
 
@@ -8,19 +9,20 @@ import { TaskItem } from './task-item.dto';
 export class TaskService {
   constructor() {}
 
-  private tasks: TaskItem[] = [];
+  private tasks = new BehaviorSubject([new TaskItem('Todo Test')]);
 
-  getAllTasks(): ReadonlyArray<TaskItem> {
+  getAllTasks(): Observable<TaskItem[]> {
     return this.tasks;
   }
 
   addTask(newTask: NewTask) {
-    this.tasks = this.tasks.concat(new TaskItem(newTask.title));
+    var updatedTasks = this.tasks.value.concat(new TaskItem(newTask.title));
+    this.tasks.next(updatedTasks);
   }
 
   removeTask(existingTask: TaskItem) {
-    console.log('removiendo desde servicio');
-
-    this.tasks = this.tasks.filter((task) => task != existingTask);
+    // console.log('removiendo desde servicio');
+    var updatedTasks = this.tasks.value.filter((task) => task != existingTask);
+    this.tasks.next(updatedTasks);
   }
 }
