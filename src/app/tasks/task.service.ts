@@ -10,14 +10,12 @@ export class TaskService {
 
   private tasks: TaskItem[] = [];
 
-  getAllTasks(): TaskItem[] {
+  getAllTasks(): ReadonlyArray<TaskItem> {
     return this.tasks;
   }
 
   addTask(newTask: NewTask) {
-    this.tasks.push(new TaskItem(newTask.title));
-
-    console.log();
+    this.tasks = this.tasks.concat(new TaskItem(newTask.title));
   }
 
   removeTask(existingTask: TaskItem) {
