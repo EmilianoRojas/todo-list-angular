@@ -1,0 +1,70 @@
+{
+  "uuid": "99b1b5b9-5f15-4bfe-be89-efbb60197f7c",
+  "lastMigration": 24,
+  "name": "Task api mocks",
+  "endpointPrefix": "",
+  "latency": 0,
+  "port": 3001,
+  "hostname": "0.0.0.0",
+  "routes": [
+    {
+      "uuid": "74877c96-1202-4086-bd9f-ca19000b67a9",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "tasks",
+      "responses": [
+        {
+          "uuid": "c0875e43-2a60-48c8-8545-2fc151ff1344",
+          "body": "[\n  {\n    \"title\": \"Go to the mall\"\n  },\n  {\n    \"title\": \"Hacer ejercicio\"\n  },\n  {\n    \"title\": \"Hacer pupu\"\n  }\n]",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "bodyType": "INLINE",
+          "filePath": "",
+          "databucketID": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false,
+          "default": true
+        }
+      ],
+      "enabled": true,
+      "responseMode": null
+    }
+  ],
+  "proxyMode": false,
+  "proxyHost": "",
+  "proxyRemovePrefix": false,
+  "tlsOptions": {
+    "enabled": false,
+    "type": "CERT",
+    "pfxPath": "",
+    "certPath": "",
+    "keyPath": "",
+    "caPath": "",
+    "passphrase": ""
+  },
+  "cors": true,
+  "headers": [
+    {
+      "key": "Content-Type",
+      "value": "application/json"
+    }
+  ],
+  "proxyReqHeaders": [
+    {
+      "key": "",
+      "value": ""
+    }
+  ],
+  "proxyResHeaders": [
+    {
+      "key": "",
+      "value": ""
+    }
+  ],
+  "data": []
+}
